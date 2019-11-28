@@ -1,0 +1,77 @@
+<!-- Material form contact -->
+<div class="card" style="margin-left: 15%;">
+
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Partner Details</strong>
+    </h5>
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+        <!-- Form -->
+        <form class="text-center">
+            <!-- Name -->
+            <div class="md-form mt-3">
+                <label for="title">Title </label>
+                <input type="text" id="title" name="title" class="form-control" [(ngModel)]="partnerDetails.title">
+            </div>
+            <!--Message-->
+            <div class="md-form">
+                <label for="description">Message</label>
+                <textarea id="description" name="description" class="form-control md-textarea" rows="3" [(ngModel)]="partnerDetails.description"></textarea>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 divImg">
+                    <label>Banner Image</label>
+                    <div>
+                        <img [src]="partnerDetails.bannerImage" alt="bannerImage" height="200" width="180">
+                    </div>
+                    <div class="form-group">
+                        <input type="file" id="bannerImage" name="bannerImage" (change)="handleFileInput($event.target.files,'bannerImage')" class=" btn-primary">
+                    </div>
+                </div>
+                <div class="col-sm-6 divImg">
+                    <label>Thumbnail</label>
+                    <div>
+                        <img [src]="partnerDetails.thumbnail" alt="thumbnail" height="200" width="180">
+                    </div>
+                    <div class="form-group">
+                        <input type="file" id="thumbnail" name="thumbnail" (change)="handleFileInput($event.target.files,'thumbnail')" class=" btn-primary">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Images</label>
+                </div>
+                <div class="col-md-4" *ngFor="let item of partnerDetails.imagesArr; let i = index">
+                    <div [hidden]="item.isImgDeleted" class="divImg">
+                        <img [src]="item.image" height="200" width="180">
+                        <mat-icon (click)="deleteImg(item.image,partnerDetails)">delete_outline</mat-icon>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <span>Add more images</span>
+                    <div class="file-field">
+                        <div class="divImg">
+
+                            <div [hidden]="urls.length>0">
+                                <img src="{{defaultImg}}" height="200" width="180">
+                            </div>
+
+                            <div class="btn btn-primary btn-sm float-left">
+                                <input type="file" (change)="readURL($event.target.files);" multiple>
+                            </div>
+                            <img *ngFor="let url of urls" [src]="url" height="200" width="180">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Send button -->
+            <button class="btn btn-rounded btn-block z-depth-0 my-4 waves-effect btn-primary" type="submit" (click)="updatePartner(partnerDetails)">Update</button>
+        </form>
+        <!-- Form -->
+    </div>
+</div>
+<!-- Material form contact -->

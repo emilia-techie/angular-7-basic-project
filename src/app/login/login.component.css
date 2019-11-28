@@ -1,0 +1,23 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-container>* {
+    width: 100%;
+}
+
+.mat-form-field {
+    margin-bottom: 4%;
+}
+
+.login {
+    width: 45%;
+    height: auto;
+    margin: auto;
+    margin-top: 10%;
+}
+
+.errorMsg {
+    font-size: 75%;
+}

@@ -1,0 +1,85 @@
+<!-- Material form contact -->
+<!-- <app-partners #apppartners></app-partners> -->
+<div class="card" style="margin-left: 15%;">
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Add Partner</strong>
+    </h5>
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+        <!-- Form -->
+        <form class="text-center" [formGroup]="addPartnerForm" (ngSubmit)="addPartner()">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && ap.title.errors }" />
+                <div *ngIf="submitted && ap.title.errors" class="invalid-feedback">
+                    <div *ngIf="ap.title.errors.required">Title is required</div>
+                </div>
+            </div>
+
+            <div class="md-form">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" class="form-control md-textarea" rows="3" formControlName="description" [ngClass]="{ 'is-invalid': submitted && ap.description.errors }"></textarea>
+                <div *ngIf="submitted && ap.description.errors" class="invalid-feedback">
+                    <div *ngIf="ap.description.errors.required">Description is required</div>
+                    <div *ngIf="ap.description.errors.minlength">Minimum length of description should be 10.</div>
+                    <div *ngIf="ap.description.errors.maxlength">Maximum length of description should be 25.</div>
+                    <div *ngIf="ap.description.errors.pattern">Allow letters and numbers only.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 divImg" [ngClass]="{ 'is-invalid': submitted && ap.bannerImage.errors }">
+                    <label for="title">Banner Image </label>
+                    <div [hidden]="previewBannerImg">
+                        <img [src]="defaultSingleImg" alt="bannerImage" height="200" width="180">
+                    </div>
+                    <div [hidden]="!previewBannerImg">
+                        <img [src]="previewBannerImg" alt="bannerImage" height="200" width="180">
+                    </div>
+                    <div class="form-group">
+                        <input type="file" formControlName="bannerImage" (change)="handleFileInput($event.target.files,'bannerImage')" class=" btn-primary">
+                    </div>
+                    <div *ngIf="submitted && ap.bannerImage.errors" class="invalid-feedback">
+                        <div *ngIf="ap.bannerImage.errors.required">Banner image is required</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 divImg">
+                    <label for="title">Thumbnail</label>
+                    <div [hidden]="previewThumbnailImg" [ngClass]="{ 'is-invalid': submitted && ap.thumbnail.errors }">
+                        <img [src]="defaultSingleImg" alt="thumbnail" height="200" width="180">
+                    </div>
+                    <div [hidden]="!previewThumbnailImg">
+                        <img [src]="previewThumbnailImg" alt="thumbnail" height="200" width="180">
+                    </div>
+                    <div class="form-group">
+                        <input type="file" id="thumbnail" name="thumbnail" formControlName="thumbnail" (change)="handleFileInput($event.target.files,'thumbnail')" class=" btn-primary">
+                    </div>
+                    <div *ngIf="submitted && ap.thumbnail.errors" class="invalid-feedback">
+                        <div *ngIf="ap.thumbnail.errors.required">Thumbnail image is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <span>Add images</span>
+                    <div class="file-field">
+                        <div class="divImg">
+                            <div [hidden]="urls.length>0">
+                                <img src="{{defaultImg}}" height="200" width="180">
+                            </div>
+                            <div class="btn btn-primary btn-sm float-left">
+                                <input type="file" (change)="readURL($event.target.files);" multiple>
+                            </div>
+                            <img *ngFor="let url of urls" [src]="url" height="200" width="180">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-rounded btn-block z-depth-0 my-4 waves-effect btn-primary" type="submit">Add</button>
+        </form>
+        <!-- Form -->
+    </div>
+</div>
+<!-- Material form contact -->
